@@ -530,6 +530,25 @@
             </li>
           </ul>
         </div>
+          <div class="footer-subscribe">
+        <p class="subscribe-title">Subscribe</p>
+
+        <form class="subscribe-form">
+          <input
+            type="email"
+            name="email"
+            class="subscribe-input"
+            placeholder="E-mail"
+            required
+          />
+          <button type="submit" class="subscribe-button">
+            Subscribe
+            <svg width="24" height="24">
+              <use href="./images/icons.svg#Frame-3"></use>
+            </svg>
+          </button>
+        </form>
+      </div>
       </div>
     </footer>
 
@@ -588,12 +607,14 @@
             ></textarea>
           </div>
 
-          <label class="checkbox-field">
-            <input type="checkbox" name="agree" class="visually-hidden" />
-            <span class="custom-checkbox"></span>
-            I accept the terms and conditions of the
-            <a href="#" class="privacy-link">Privacy Policy</a>
-          </label>
+<label class="checkbox-field">
+  <input type="checkbox" class="visually-hidden" />
+  <span class="custom-checkbox"></span>
+  <span class="policy-text">
+    I accept the terms and conditions of the
+    <a href="#" class="privacy-link">Privacy Policy</a>
+  </span>
+</label>
 
           <button class="reg-button" type="submit">Send</button>
         </form>
