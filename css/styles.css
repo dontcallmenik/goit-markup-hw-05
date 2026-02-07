@@ -489,7 +489,7 @@ body {
 .footer-social-link svg {
   fill: #f4f4fd;
 }
-/* Модалка и бекдроп — оставляем как есть */
+/* ========== Модалка ========== */
 .modal-overlay {
   background-color: rgba(46, 47, 66, 0.4);
   position: fixed;
@@ -520,8 +520,8 @@ body {
 /* Кнопка закрытия */
 .modal-close-button {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 72px;
+  right: 24px;
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -531,9 +531,13 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 0;
-  margin: 0;
-  box-shadow: none;
+  transition:
+    background-color 250ms,
+    fill 250ms;
+}
+.modal-close-button:hover svg,
+.modal-close-button:focus svg {
+  fill: #4d5ae5;
 }
 
 .modal-title {
@@ -561,24 +565,25 @@ body {
   color: #8e8f99;
 }
 
+/* Input-wrapper с иконкой */
 .input-wrapper {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
-/* Инпуты и textarea */
 .input-wrapper input,
 .comment {
   width: 100%;
   height: 40px;
-  padding-left: 38px;
+  padding-left: 38px; /* место для иконки */
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid rgba(46, 47, 66, 0.4);
   font-family: "Roboto", sans-serif;
-  font-weight: 400;
   font-size: 13px;
   line-height: 1.5;
-  letter-spacing: 0.02em;
   transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
 }
 
 .comment {
@@ -587,26 +592,41 @@ body {
   resize: none;
 }
 
-/* Плейсхолдер */
-.input-wrapper input::placeholder,
-.comment::placeholder {
-  font-size: 12px;
-  color: #8e8f99;
+.input-wrapper .input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 24px;
+  fill: #8e8f99;
+  pointer-events: none;
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Иконки — hover и focus */
 .input-wrapper:hover .input-icon,
 .input-wrapper:has(input:focus) .input-icon,
 .input-wrapper:has(textarea:focus) .input-icon {
   fill: #4d5ae5;
-  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Фокус на input/textarea */
 .input-wrapper input:focus,
 .comment:focus {
   border-color: #4d5ae5;
   outline: none;
+}
+
+/* Checkbox */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
 
 .checkbox-field {
@@ -614,39 +634,18 @@ body {
   align-items: center;
   gap: 8px;
   font-size: 12px;
-  cursor: pointer; /* чтобы текст тоже кликабелен */
-}
-
-.checkbox-field input {
-  display: none; /* скрываем стандартный чекбокс */
+  cursor: pointer;
 }
 
 .custom-checkbox {
   width: 16px;
   height: 16px;
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  background-color: #fff;
-  position: relative;
-  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+  transition: all 250ms;
 }
 
-/* Галочка */
-.checkbox-field input:checked + .custom-checkbox::after {
-  content: "";
-  position: absolute;
-  left: 4px;
-  top: 0px;
-  width: 6px;
-  height: 12px;
-  border: solid #4d5ae5;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-}
-
-/* Hover для чекбокса */
-.checkbox-field:hover .custom-checkbox {
-  border-color: #4d5ae5;
+.checkbox-field input:checked + .custom-checkbox use {
+  stroke: #4d5ae5;
 }
 
 /* Кнопка отправки */
@@ -663,23 +662,21 @@ body {
 }
 
 .reg-button:hover {
-  background-color: #3b47c2; /* чуть темнее синего */
+  background-color: #3b47c2;
 }
-.input-wrapper .input-icon {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none; /* чтобы кликали по input, а не по svg */
+.checkbox-field input {
+  display: none;
 }
-.input-wrapper input {
-  flex: 1;
-  height: 40px;
-  padding-left: 38px; /* место под иконку */
-  box-sizing: border-box;
+
+.custom-checkbox .checkmark {
+  opacity: 0;
+  transition: opacity 0.2s;
 }
-.input-wrapper {
-  position: relative; /* обязательно */
-  display: flex;
-  align-items: center; /* выравнивание по центру по вертикали */
+
+.checkbox-field input:checked + .custom-checkbox .checkmark {
+  opacity: 1;
+}
+
+.checkbox-field:hover .custom-checkbox rect {
+  stroke: #4d5ae5;
 }
