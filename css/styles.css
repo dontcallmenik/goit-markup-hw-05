@@ -489,75 +489,97 @@ body {
 .footer-social-link svg {
   fill: #f4f4fd;
 }
-/* ========== Модалка ========== */
+/* ===== MODAL OVERLAY ===== */
 .modal-overlay {
-  background-color: rgba(46, 47, 66, 0.4);
   position: fixed;
   inset: 0;
-  z-index: 999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: rgba(46, 47, 66, 0.4);
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    opacity 250ms ease,
+    visibility 250ms ease;
 }
 
 .modal-overlay.is-open {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
 }
 
+/* ===== MODAL ===== */
 .modal {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   width: 408px;
-  padding: 24px;
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+  padding: 72px 24px 24px;
+  background-color: #ffffff;
+  border-radius: 4px;
+
+  box-shadow:
+    0px 1px 6px rgba(46, 47, 66, 0.08),
+    0px 1px 1px rgba(46, 47, 66, 0.16),
+    0px 2px 1px rgba(46, 47, 66, 0.08);
 }
 
-/* Кнопка закрытия */
+/* ===== CLOSE BUTTON ===== */
 .modal-close-button {
   position: absolute;
-  top: 72px;
+  top: 24px;
   right: 24px;
+
   width: 24px;
   height: 24px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: rgba(231, 233, 252, 1);
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #e7e9fc;
+
   cursor: pointer;
-  transition:
-    background-color 250ms,
-    fill 250ms;
-}
-.modal-close-button:hover svg,
-.modal-close-button:focus svg {
-  fill: #4d5ae5;
+  transition: background-color 250ms ease;
 }
 
+.modal-close-button svg {
+  fill: #2e2f42;
+  transition: fill 250ms ease;
+}
+
+.modal-close-button:hover,
+.modal-close-button:focus {
+  background-color: #404bbf;
+}
+
+.modal-close-button:hover svg,
+.modal-close-button:focus svg {
+  fill: #ffffff;
+}
+
+/* ===== FORM ===== */
 .modal-title {
   text-align: center;
-  margin-top: 24px;
   margin-bottom: 16px;
   font-weight: 500;
 }
 
-/* Форма */
 .reg-form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
 }
 
 .form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.form-field:last-of-type {
+  margin-bottom: 16px;
 }
 
 .form-label {
@@ -565,48 +587,38 @@ body {
   color: #8e8f99;
 }
 
-/* Input-wrapper с иконкой */
+/* ===== INPUTS ===== */
 .input-wrapper {
   position: relative;
-  display: flex;
-  align-items: center;
 }
 
 .input-wrapper input,
 .comment {
   width: 100%;
   height: 40px;
-  padding-left: 38px; /* место для иконки */
+  padding-left: 38px;
   border-radius: 4px;
   border: 1px solid rgba(46, 47, 66, 0.4);
-  font-family: "Roboto", sans-serif;
-  font-size: 13px;
-  line-height: 1.5;
-  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  box-sizing: border-box;
+  transition: border-color 250ms ease;
 }
 
 .comment {
-  height: 138px;
+  height: 120px;
   padding: 8px;
   resize: none;
 }
 
-.input-wrapper .input-icon {
+.input-icon {
   position: absolute;
-  left: 12px;
+  left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  width: 18px;
-  height: 24px;
   fill: #8e8f99;
-  pointer-events: none;
-  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: fill 250ms ease;
 }
 
 .input-wrapper:hover .input-icon,
-.input-wrapper:has(input:focus) .input-icon,
-.input-wrapper:has(textarea:focus) .input-icon {
+.input-wrapper:has(input:focus) .input-icon {
   fill: #4d5ae5;
 }
 
@@ -616,17 +628,13 @@ body {
   outline: none;
 }
 
-/* Checkbox */
+/* ===== CHECKBOX ===== */
 .visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-  white-space: nowrap;
-  clip: rect(0 0 0 0);
   overflow: hidden;
+  clip: rect(0 0 0 0);
 }
 
 .checkbox-field {
@@ -634,49 +642,53 @@ body {
   align-items: center;
   gap: 8px;
   font-size: 12px;
+  margin-bottom: 24px;
   cursor: pointer;
 }
 
 .custom-checkbox {
   width: 16px;
   height: 16px;
-  display: block;
-  transition: all 250ms;
+  border: 1px solid rgba(46, 47, 66, 0.4);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color 250ms ease,
+    border 250ms ease;
 }
 
-.checkbox-field input:checked + .custom-checkbox use {
-  stroke: #4d5ae5;
-}
-
-/* Кнопка отправки */
-.reg-button {
-  margin: 24px auto 0;
-  height: 56px;
-  width: 169px;
-  background: #4d5ae5;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.reg-button:hover {
-  background-color: #3b47c2;
-}
-.checkbox-field input {
-  display: none;
-}
-
-.custom-checkbox .checkmark {
+.custom-checkbox::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff;
   opacity: 0;
-  transition: opacity 0.2s;
 }
 
-.checkbox-field input:checked + .custom-checkbox .checkmark {
+.checkbox-field input:checked + .custom-checkbox {
+  background-color: #404bbf;
+  border: none;
+}
+
+.checkbox-field input:checked + .custom-checkbox::after {
   opacity: 1;
 }
 
-.checkbox-field:hover .custom-checkbox rect {
-  stroke: #4d5ae5;
+/* ===== BUTTON ===== */
+.reg-button {
+  width: 169px;
+  height: 56px;
+  margin: 0 auto;
+  background-color: #4d5ae5;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 250ms ease;
+}
+
+.reg-button:hover {
+  background-color: #404bbf;
 }
