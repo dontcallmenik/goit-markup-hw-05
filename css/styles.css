@@ -521,13 +521,15 @@ body {
 
   width: 408px;
   padding: 72px 24px 24px;
-  background-color: #ffffff;
+  background-color: #fcfcfc;
   border-radius: 4px;
 
   box-shadow:
-    0 1px 6px rgba(46, 47, 66, 0.08),
-    0 1px 1px rgba(46, 47, 66, 0.16),
-    0 2px 1px rgba(46, 47, 66, 0.08);
+  
+0 1px 1px rgba(0, 0, 0, 0.14),
+0 1px 3px rgba(0, 0, 0, 0.12),
+0 2px 1px rgba(0, 0, 0, 0.2);
+
 }
 
 /* =========================
@@ -629,7 +631,7 @@ body {
 }
 
 .input-wrapper:hover .input-icon,
-.input-wrapper:has(input:focus) .input-icon {
+.input-wrapper:focus-within .input-icon {
   fill: #4d5ae5;
 }
 
@@ -834,15 +836,8 @@ TEXT & LINKS
 
 /* ========================= INPUT ICONS
 ========================= */
-.input-icon {
-  fill: #2e2f42;
-  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
 
-.input-wrapper:hover .input-icon,
-.input-wrapper:focus-within .input-icon {
-  fill: #4d5ae5;
-}
+
 
 /* =========================
 SUBSCRIBE FORM
