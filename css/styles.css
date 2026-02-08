@@ -681,66 +681,124 @@ body {
 }
 
 /* =========================
-   CHECKBOX (ОНОВЛЕНИЙ)
+   CHECKBOX (ПОВНІСТЮ ПЕРЕРОБЛЕНИЙ)
 ========================= */
 
-/* скрытый нативный чекбокс */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-}
-
-/* контейнер */
+/* Контейнер */
 .checkbox-field {
   display: flex;
-  align-items: center;
+  align-items: center; /* ЗМІНЕНО: center замість flex-start */
   gap: 8px;
   font-size: 12px;
   margin-bottom: 24px;
   cursor: pointer;
 }
 
-/* кастомный квадрат */
+/* Кастомний квадрат */
 .custom-checkbox {
   width: 16px;
   height: 16px;
+  min-width: 16px; /* додаємо для стабільності */
   border: 1px solid rgba(46, 47, 66, 0.4);
   border-radius: 2px;
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: transparent;
+  position: relative;
+  /* Видаляємо margin-top, бо використовуємо align-items: center */
 }
 
-/* SVG галочка из спрайта */
-.custom-checkbox::after {
-  content: "";
-  width: 10px;
-  height: 8px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8' fill='none'%3E%3Cpath d='M1 4L3.5 6.5L9 1' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center;
+/* SVG галочка */
+.custom-checkbox .icon-checkmark {
   opacity: 0;
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* Гарантуємо, що SVG буде білим */
+  color: white;
+  stroke: white;
 }
 
-/* состояние checked */
+/* Для гарантії білого кольору галочки */
+.custom-checkbox .icon-checkmark use,
+.custom-checkbox .icon-checkmark path,
+.custom-checkbox .icon-checkmark polyline {
+  color: white;
+  stroke: white;
+  fill: none;
+}
+
+/* Стан checked */
 .checkbox-field input:checked + .custom-checkbox {
   background-color: #404bbf;
   border-color: #404bbf;
 }
 
-.checkbox-field input:checked + .custom-checkbox::after {
+.checkbox-field input:checked + .custom-checkbox .icon-checkmark {
   opacity: 1;
 }
 
+/* Ховер-стан */
+.checkbox-field:hover .custom-checkbox {
+  border-color: #4d5ae5;
+}
+
+/* Фокус для доступності */
+.checkbox-field input:focus + .custom-checkbox {
+  outline: 2px solid #4d5ae5;
+  outline-offset: 2px;
+}
+
 /* =========================
-   BUTTON
+   BUTTON (ВИПРАВЛЕНИЙ)
+========================= */
+.reg-button {
+  width: 169px;
+  height: 56px;
+  margin: 0 auto;
+  background-color: #4d5ae5;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* Додаємо display: block для правильного центрування */
+  display: block;
+}
+
+/* ВИПРАВЛЕНО: розділити hover та focus */
+.reg-button:hover,
+.reg-button:focus {
+  background-color: #404bbf;
+}
+
+/* Для кращої видимості фокуса */
+.reg-button:focus {
+  outline: 2px solid #404bbf;
+  outline-offset: 2px;
+}
+
+/* =========================
+   TEXT & LINKS
+========================= */
+.policy-text {
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.04em;
+  color: #8e8f99;
+  user-select: none; /* щоб не виділявся текст при кліку */
+}
+
+.privacy-link {
+  color: #4d5ae5;
+  text-decoration: underline;
+}
+
+/* =========================
+BUTTON
 ========================= */
 .reg-button {
   width: 169px;
@@ -754,12 +812,13 @@ body {
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.reg-button:hover {
+.reg-button:hover .reg-button:focus {
+  /* Додано focus-стан */
   background-color: #404bbf;
 }
 
 /* =========================
-   TEXT & LINKS
+TEXT & LINKS
 ========================= */
 .policy-text {
   font-size: 12px;
@@ -773,8 +832,7 @@ body {
   text-decoration: underline;
 }
 
-/* =========================
-   INPUT ICONS
+/* ========================= INPUT ICONS
 ========================= */
 .input-icon {
   fill: #2e2f42;
@@ -787,7 +845,7 @@ body {
 }
 
 /* =========================
-   SUBSCRIBE FORM
+SUBSCRIBE FORM
 ========================= */
 .footer-subscribe {
   display: flex;
@@ -827,7 +885,12 @@ body {
 }
 
 .subscribe-input::placeholder {
-  color: rgba(255, 255, 255, 0.6); /* Плейсхолдер з прозорістю */
+  color: rgba(
+    255,
+    255,
+    255,
+    1
+  ); /* Змінено на суцільний білий */ /* Плейсхолдер з прозорістю */
 }
 
 .subscribe-input:focus {
