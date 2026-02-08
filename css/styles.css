@@ -428,7 +428,6 @@ body {
 .footer .container {
   display: flex;
   align-items: baseline;
-  gap: 120px;
 }
 
 .footer-logo {
@@ -454,6 +453,7 @@ body {
   letter-spacing: 0.02em;
   color: #f4f4fd;
   max-width: 264px;
+  margin-right: 120px;
 }
 
 .social-text {
